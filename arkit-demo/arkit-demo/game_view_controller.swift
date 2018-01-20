@@ -26,23 +26,6 @@ class GameViewController: UIViewController, ARSCNViewDelegate { //of tyoe UICont
         somethingSceneView.scene = thisScene!
     }
     
-    /*
-     
-     //Get the 
-     
-     long1 = 0
-     lat1= 0
-     
-     long2 = 34.412646
-     lat2 = -119.848389
-     
-     x = sin(long2 - long1) * cos(long2)
-     y = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(long2 - long1)
-     
-     atan2(x,y)
- 
- */
-    
     
     override func viewWillDisappear(_ animated: Bool){
         somethingSceneView.session.pause()

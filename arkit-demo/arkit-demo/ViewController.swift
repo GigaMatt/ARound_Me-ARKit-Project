@@ -229,8 +229,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         self.modelNode.scale = scaleNode(location)
     }
     
+    
     /********************************************************************
-     Rotate the node 
+     Rotate the node along the Y-axis (if need be)
      ********************************************************************/
     func rotateNode(_ angleInRadians: Float, _ transform: SCNMatrix4) -> SCNMatrix4 {
         let rotation = SCNMatrix4MakeRotation(angleInRadians, 0, 1, 0)
@@ -238,13 +239,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
     
     
-    /********************************************************************
+    /***************************************************************************************************************************************
      Scale model in proportion to the distance
-     ********************************************************************/
+     
+     NOTE: Scale the node in proportion to the distance.
+            They are inversely proportional -the greater the distance, the less the scale.
+                In online guide's case, they just divide 1000 by the distance and don’t allow the value to be less than 1.5 or great than 3
+     ***************************************************************************************************************************************/
     func scaleNode (_ location: CLLocation) -> SCNVector3 {
             let scale = min( max( Float(1000/distance), 1.5 ), 3 )
             return SCNVector3(x: scale, y: scale, z: scale)
-        }
+    }
     
     
 }
