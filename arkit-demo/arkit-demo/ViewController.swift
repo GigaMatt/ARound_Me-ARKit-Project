@@ -42,9 +42,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
-    //Store and name the root node of the SCCNode HUMAN_HEAD model (within .scn)
+    //Store and name the root node of the SCCNode MapMarker model (within .scn)
     var modelNode:SCNNode!
-    let rootNodeName = "Head"
+    let rootNodeName = "MapMarker"
     
     //Original transformation of the node to calculate the orientation (rotation) of the model in the best possible way
     var originalTransform:SCNMatrix4!
@@ -67,7 +67,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ARView.scene = SCNScene(named: "art.scnassets/ship.scn")!
+        ARView.scene = SCNScene(named: "art.scnassets/MapMarker.scn")!
         
         //Set the view's delegate
         //sceneView.delegate = self
@@ -175,7 +175,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         //Will ALWAYS be nil at first initiation
         if self.modelNode == nil {
-            let modelScene = SCNScene(named: "art.scnassets/head.dae")!                                 //FIXME: May need to be head.scn
+            let modelScene = SCNScene(named: "art.scnassets/MapMarker.dae")!                                 //FIXME: May need to be head.scn
             self.modelNode = modelScene.rootNode.childNode(withName: rootNodeName, recursively: true)!
             
             //Move model's pivot to its center in the Y axis
@@ -194,10 +194,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             //Create arrow from the emoji
             let arrow = makeBillboardNode("⬇️".image()!)
             
-            //Position it on top of the HUMAN_HEAD
+            //Position it on top of the MapMarker
             arrow.position = SCNVector3Make(0, 4, 0)
             
-            //Add it as a child of the HUMAN_HEAD model
+            //Add it as a child of the MapMarker model
             self.modelNode.addChildNode(arrow)
         }
         else {
