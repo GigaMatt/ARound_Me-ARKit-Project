@@ -15,7 +15,6 @@
 		7EFA51B82013355600F66085 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFA51B62013355600F66085 /* LaunchScreen.storyboard */; };
 		7EFA51C32013355600F66085 /* arkit_demoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA51C22013355600F66085 /* arkit_demoTests.swift */; };
 		7EFA51CE2013355600F66085 /* arkit_demoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA51CD2013355600F66085 /* arkit_demoUITests.swift */; };
-		7EFA51DC2013358300F66085 /* game_view_controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA51DB2013358300F66085 /* game_view_controller.swift */; };
 		7EFA521A2013A96400F66085 /* FloatingPoint+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA52192013A96400F66085 /* FloatingPoint+Extension.swift */; };
 		7EFA521C2013A9B300F66085 /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFA521B2013A9B300F66085 /* String+Extension.swift */; };
 /* End PBXBuildFile section */
@@ -52,7 +51,6 @@
 		7EFA51C92013355600F66085 /* arkit-demoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "arkit-demoUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EFA51CD2013355600F66085 /* arkit_demoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arkit_demoUITests.swift; sourceTree = "<group>"; };
 		7EFA51CF2013355600F66085 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7EFA51DB2013358300F66085 /* game_view_controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = game_view_controller.swift; sourceTree = "<group>"; };
 		7EFA52192013A96400F66085 /* FloatingPoint+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extension.swift"; sourceTree = "<group>"; };
 		7EFA521B2013A9B300F66085 /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,7 +110,6 @@
 				7EFA51B42013355600F66085 /* Assets.xcassets */,
 				7EFA51B62013355600F66085 /* LaunchScreen.storyboard */,
 				7EFA51B92013355600F66085 /* Info.plist */,
-				7EFA51DB2013358300F66085 /* game_view_controller.swift */,
 				7EFA52192013A96400F66085 /* FloatingPoint+Extension.swift */,
 				7EFA521B2013A9B300F66085 /* String+Extension.swift */,
 			);
@@ -144,9 +141,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7EFA51D22013355600F66085 /* Build configuration list for PBXNativeTarget "arkit-demo" */;
 			buildPhases = (
+				15FF3992DA2CDE206B9CED1C /* [CP] Check Pods Manifest.lock */,
 				7EFA51A42013355600F66085 /* Sources */,
 				7EFA51A52013355600F66085 /* Frameworks */,
 				7EFA51A62013355600F66085 /* Resources */,
+				5AAAAF3D2D560C091BCD233A /* [CP] Embed Pods Frameworks */,
+				541E519ECB56C54BDC745AA6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -267,6 +267,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		15FF3992DA2CDE206B9CED1C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-arkit-demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		541E519ECB56C54BDC745AA6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-arkit-demo/Pods-arkit-demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5AAAAF3D2D560C091BCD233A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-arkit-demo/Pods-arkit-demo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/PusherSwift/PusherSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PusherSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-arkit-demo/Pods-arkit-demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7EFA51A42013355600F66085 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -276,7 +334,6 @@
 				7EFA51AC2013355600F66085 /* AppDelegate.swift in Sources */,
 				7EFA521A2013A96400F66085 /* FloatingPoint+Extension.swift in Sources */,
 				7EFA521C2013A9B300F66085 /* String+Extension.swift in Sources */,
-				7EFA51DC2013358300F66085 /* game_view_controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
