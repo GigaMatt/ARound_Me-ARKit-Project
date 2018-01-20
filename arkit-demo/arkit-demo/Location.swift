@@ -13,6 +13,12 @@ class Location {
     var latitude: Double
     var longitude: Double
     
+    init() {
+        self.name = ""
+        self.latitude = 0
+        self.longitude = 0
+    }
+    
     init(name: String, latitude: Double, longitude: Double) {
         self.name = name
         self.latitude = latitude

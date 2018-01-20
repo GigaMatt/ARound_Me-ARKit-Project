@@ -11,7 +11,7 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
-
+import PusherSwift
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     //Request && store the user's location
@@ -38,7 +38,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     func setStatusText() {
         var text = "Status: \(status!)\n"
         text += "Distance: \(String(format: "%.2f m", distance))"
-        statusTextView.text = text
+        //statusTextView.text = text
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -59,6 +59,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     )
     var channel: PusherChannel!
     
+    @IBOutlet var ARView: ARSCNView!
     
     /**************************************
      Set up SceneKit && Location Services
@@ -66,12 +67,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ARView.scene = SCNScene(named: "art.scnassets/ship.scn")!
+        
         //Set the view's delegate
-        sceneView.delegate = self
+        //sceneView.delegate = self
         //Create a new scene
-        let scene = SCNScene()
+        //let scene = SCNScene()
         //Set the scene to the view
-        sceneView.scene = scene
+        //sceneView.scene = scene
         
         //Start location services
         locationManager.delegate = self
@@ -82,7 +85,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         status = "Getting user location..."
         
         //Set a padding in the text view
-        statusTextView.textContainerInset = UIEdgeInsetsMake(20.0, 10.0, 10.0, 0.0)
+        //statusTextView.textContainerInset = UIEdgeInsetsMake(20.0, 10.0, 10.0, 0.0)
     }
     
     
@@ -97,14 +100,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         configuration.worldAlignment = .gravityAndHeading
         
         //Run view session
-        sceneView.session.run(configuration)
+        //sceneView.session.run(configuration)
+        
+        let config = ARWorldTrackingConfiguration()
+        ARView.session.run(config)  //setting the scene \/ seeing the image here
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         //Pause the view's session
-        sceneView.session.pause()
+        ARView.session.pause()
     }
     
     
@@ -177,7 +183,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             positionModel(location)
             
             //Add the model to the scene
-            sceneView.scene.rootNode.addChildNode(self.modelNode)
+            //sceneView.scene.rootNode.addChildNode(self.modelNode)
             
             //Create arrow from the emoji
             let arrow = makeBillboardNode("⬇️".image()!)
@@ -315,7 +321,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         return atan2(y, x)
     }
     
-    
+    func sessionWasInterrupted(_ session: ARSession) {
+        
+    }
+    func sessionInterruptionEnded(_ session: ARSession) {
+        
+    }
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        
+    }
 }
 
 

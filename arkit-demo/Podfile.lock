@@ -1,0 +1,18 @@
+PODS:
+  - Alamofire (4.6.0)
+  - PusherSwift (5.1.0)
+  - SwiftyJSON (4.0.0)
+
+DEPENDENCIES:
+  - Alamofire
+  - PusherSwift
+  - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: f41a599bd63041760b26d393ec1069d9d7b917f4
+  PusherSwift: ea736474a51f5e6764b252dfda14014cfa3e828f
+  SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+
+PODFILE CHECKSUM: 3e3826211f45030b74357a15bffbaab58ff9690b
+
+COCOAPODS: 1.4.0
