@@ -142,8 +142,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
     
     /*********************Added post-Saturday lunch********************/
-    let options = PusherClientOptions(host: .cluster("us2"))
-    let pusher = Pusher(key: "6580bda10c04b7ce1a11", options: options)
+    //let options = PusherClientOptions(host: .cluster("us2"))
+    //let pusher = Pusher(key: "6580bda10c04b7ce1a11", options: options)
     /****************************************************************/
 
     func connectToPusher() {                                                                                 //Connect + subscribe to channel, && bind to event

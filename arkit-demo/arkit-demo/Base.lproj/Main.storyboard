@@ -6,6 +6,8 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -21,9 +23,8 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daI-Yo-6zs" customClass="ARView">
                                 <rect key="frame" x="0.0" y="140" width="375" height="672"/>
                             </arscnView>
-                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-fn-CgZ">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-fn-CgZ">
                                 <rect key="frame" x="16" y="699" width="148.33333333333334" height="79"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Heading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxu-us-fI3">
                                         <rect key="frame" x="0.0" y="0.0" width="148.33333333333334" height="26.333333333333332"/>
@@ -51,6 +52,8 @@
                         <constraints>
                             <constraint firstItem="daI-Yo-6zs" firstAttribute="width" secondItem="rZ5-Wp-pCo" secondAttribute="width" id="1D8-fZ-DmO"/>
                             <constraint firstItem="daI-Yo-6zs" firstAttribute="height" secondItem="rZ5-Wp-pCo" secondAttribute="height" id="3LP-iP-fLe"/>
+                            <constraint firstItem="t7A-fn-CgZ" firstAttribute="top" secondItem="daI-Yo-6zs" secondAttribute="bottom" constant="-113" id="91z-ML-0ZG"/>
+                            <constraint firstItem="daI-Yo-6zs" firstAttribute="baseline" secondItem="t7A-fn-CgZ" secondAttribute="firstBaseline" constant="15" symbolType="layoutAnchor" id="eca-zK-w01"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m2H-0j-RBQ"/>
                     </view>
