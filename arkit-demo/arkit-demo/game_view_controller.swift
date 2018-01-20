@@ -22,7 +22,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate { //of tyoe UICont
         somethingSceneView.showsStatistics = false  //essentilly shwos FPS && timing information
         
         
-        let thisScene = SCNScene(named: "art.scnassets/ship.scn")   //creates new scene
+        let scene = SCNScene(named: "art.scnassets/ship.scn")   //creates new scene
         somethingSceneView.scene = thisScene!
     }
     
