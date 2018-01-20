@@ -1,2 +1,2 @@
-# E-Corp-app
+# Google-Maps-ARKit
 iOS app for SBHacks IV
