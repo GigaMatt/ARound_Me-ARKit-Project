@@ -6,10 +6,45 @@
 //  Copyright © 2018 Matthew Medina. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import SceneKit
 import ARKit
+import CoreLocation
+import PusherSwift      //FIXME: Still need to download from article
 
+
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+    let locationManager = CLLocationManager()       //to request the user's location
+    var userLocation = CLLocation()                 //to store the user's location
+    
+    var heading : Double! = 0.0                     //Direction the other person is heading
+    var distance : Float! = 0.0 {                   //Distance the other person is from us
+        didSet {
+            setStatusText()
+        }
+    }
+    var status: String! {
+        didSet {
+            setStatusText()
+        }
+    }
+    
+    /*
+     Display the distance on-screen
+     Text will be updated as new values come in
+    */
+    func setStatusText() {
+        var text = "Status: \(status!)\n"
+        text += "Distance: \(String(format: "%.2f m", distance))"
+        statusTextView.text = text
+    }
+}
+
+
+
+
+//------------------------------------------------------------------------//
 class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
