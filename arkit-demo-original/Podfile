@@ -4,5 +4,5 @@ use_frameworks!
 
 target 'arkit-demo' do
     pod 'Alamofire', '~> 4.5'
-    pod 'SwiftyJSON'
+    pod 'SwiftyJSON', '~> 2.4'
 end

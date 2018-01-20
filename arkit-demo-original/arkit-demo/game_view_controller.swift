@@ -11,7 +11,7 @@ import UIKit
 import SceneKit
 import ARKit
 import CoreLocation
-import PusherSwift      //FIXME: Still need to download from article
+//import PusherSwift      //FIXME: Still need to download from article
 
 
 class GameViewController: UIViewController, ARSCNViewDelegate { //of tyoe UIController
@@ -22,7 +22,7 @@ class GameViewController: UIViewController, ARSCNViewDelegate { //of tyoe UICont
         somethingSceneView.showsStatistics = false  //essentilly shwos FPS && timing information
         
         
-        let scene = SCNScene(named: "art.scnassets/ship.scn")   //creates new scene
+        let thisScene = SCNScene(named: "art.scnassets/ship.scn")   //creates new scene
         somethingSceneView.scene = thisScene!
     }
     
