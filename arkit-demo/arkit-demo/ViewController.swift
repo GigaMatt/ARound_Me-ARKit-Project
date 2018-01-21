@@ -62,6 +62,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     )
     var channel: PusherChannel!
     
+    
     @IBOutlet var ARView: ARSCNView!
     
     /**************************************
@@ -70,6 +71,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sleep(3)
         ARView.scene = SCNScene(named: "art.scnassets/MapMarker.scn")!
         
         //Set the view's delegate
