@@ -2,6 +2,8 @@
 
 Find your destination in the real-world with use of ARound, an iOS App that takes advantage of ARKit. ARound takes your location and the location of significant areas around you, then generates a marker in front of the location so you can see where it is. It will even give you the name and some information about the place of interest. This project was developed at the SBHacks IV Hackathon between [Duc Dao](https://ducdao.io/), [Matthew Montoya](bit.ly/msmontoya2), and [Daniel Villa](https://github.com/djvilla).
 
+Note: The app is currently optimized for the iPhone X running iOS 11.2 or newer. It may not function properly on non-iPhone X devices and/or devices running iOS 10.x or older.
+
 ##### This continues to be a work-in-progress && following SBHacks IV, will be available as an open-source project for the community to experiment with. Some of our hopes for furture work include--
 
 * Integration with ProjectDent's [ARKit-Core Location](https://github.com/ProjectDent/ARKit-CoreLocation), an open-source project.
