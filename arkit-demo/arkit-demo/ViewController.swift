@@ -142,6 +142,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.first {
             print(location.coordinate)
+            
+            self.connectToPusher()
         }
     }
     
@@ -172,7 +174,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     //let options = PusherClientOptions(host: .cluster("us2"))
     //let pusher = Pusher(key: "6580bda10c04b7ce1a11", options: options)
     /****************************************************************/
-    func connectToPusher() {                                                                                 //Connect + subscribe to channel, && bind to event
+    func connectToPusher() {
+        //Connect + subscribe to channel, && bind to event
         let channel = pusher.subscribe("private-channel")
         
         let _ = channel.bind(eventName: "client-new-location", callback: { (data: Any?) -> Void in
