@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-import SceneKit
 import ARKit
+import SceneKit
 import CoreLocation
 import PusherSwift
 
@@ -143,7 +143,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         if let location = locations.first {
             print(location.coordinate)
             
-            self.connectToPusher()
+            //self.updateLocation(location.coordinate.latitude, location.coordinate.longitude)
         }
     }
     
@@ -203,7 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         //Will ALWAYS be nil at first initiation
         if self.modelNode == nil {
-            let modelScene = SCNScene(named: "art.scnassets/MapMarker.dae")!                                 //FIXME: May need to be head.scn
+            let modelScene = SCNScene(named: "art.scnassets/MapMarker1.dae")!                                 //FIXME: May need to be head.scn
             self.modelNode = modelScene.rootNode.childNode(withName: rootNodeName, recursively: true)!
             
             //Move model's pivot to its center in the Y axis
