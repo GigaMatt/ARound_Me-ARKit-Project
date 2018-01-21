@@ -1,2 +1,2 @@
-# Google-Maps-ARKit
-iOS app for SBHacks IV
+# ARound
+iOS app for SBHacks IV.

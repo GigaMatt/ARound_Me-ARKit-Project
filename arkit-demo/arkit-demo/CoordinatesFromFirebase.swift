@@ -12,31 +12,29 @@ import SwiftyJSON
 import Firebase
 
 class CoordinatesFromFirebase {
-    let url: String = "https://sbhacksiv.firebaseio.com/buildings.json"
+    let url: String = "https://sbhacksiv.firebaseio.com/buildings/"
     let encoding = Alamofire.JSONEncoding.default
+    var locations: [Location] = [Location]()
     
-    func getLocation() -> Location {
-        let location : Location = Location()
-        
+    func getLocation() {
         // Get location information asynchronously
-        getLocationFromFirebase() { json in
-            if let json = json {
-                location.name = json["campbellHall"]["name"].stringValue
-                location.latitude = json["campbellHall"]["latitude"].doubleValue
-                location.longitude = json["campbellHall"]["longitude"].doubleValue
+        for index in 0..<5 {
+            getLocationFromFirebase(index) { json in
+                if var json = json {
+                    let location = Location(json["name"].stringValue,
+                                            json["latitude"].doubleValue,
+                                            json["longitude"].doubleValue)
+                    location.printValues()
                 
-                print("Name: " + location.name)
-                print("Latitude: " + String(format: "%.2f", location.latitude))
-                print("Longitude: " + String(format: "%.2f", location.longitude))
+                    self.locations.append(location)
+                }
             }
         }
-        
-        return location
     }
     
-    func getLocationFromFirebase(completionHandler: @escaping (JSON?) -> Void) {
+    func getLocationFromFirebase(_ index: Int, completionHandler: @escaping (JSON?) -> Void) {
         // Run a GET to retrieve JSON data from Firebase asynchronously
-        Alamofire.request(self.url,
+        Alamofire.request(urlConstructor(index),
                           method: .get,
                           encoding: self.encoding).responseJSON { response in
             // Check for GET errors
@@ -50,27 +48,19 @@ class CoordinatesFromFirebase {
             
             // Check if JSON recieved is nil
             guard (response.result.value as? [String:Any]) != nil else {
-                print ("Didn't get JSON response from Firebase!")
-                print ("Error: \(response.result.error!)")
+                print("Didn't get JSON response from Firebase!")
+                print("Error: \(response.result.error!)")
                 
                 return
             }
             
-            print("JSON EXIST! :D")
-                            
-            var json = JSON(response.result.value!)
-            let locationA : Location = Location()
-            locationA.name = json["name"].stringValue
-            locationA.latitude = json["latitude"].doubleValue
-            locationA.longitude = json["longitude"].doubleValue
-            
-            print("Name: " + locationA.name)
-            print("Latitude: " + String(format: "%.2f", locationA.latitude))
-            print("Longitude: " + String(format: "%.2f", locationA.longitude))
-                            
-            // Initialize SwiftyJSON and return it asynchronously
+            // Return JSON asynchronously
             completionHandler(JSON(response.result.value!))
         }
+    }
+    
+    func urlConstructor(_ index: Int) -> String {
+        return self.url + String(index) + ".json"
     }
 }
 

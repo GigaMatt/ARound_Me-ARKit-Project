@@ -19,9 +19,15 @@ class Location {
         self.longitude = 0
     }
     
-    init(name: String, latitude: Double, longitude: Double) {
+    init(_ name: String, _ latitude: Double, _ longitude: Double) {
         self.name = name
         self.latitude = latitude
         self.longitude = longitude
+    }
+    
+    func printValues() {
+        print("Name: " + self.name)
+        print("Latitude: " + String(format: "%f", self.latitude))
+        print("Longitude: " + String(format: "%f", self.longitude))
     }
 }
