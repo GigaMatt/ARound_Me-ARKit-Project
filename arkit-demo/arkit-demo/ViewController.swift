@@ -18,8 +18,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     @IBOutlet weak var nameLabel: UILabel!
     
     //Request && store the user's location
-    let locationManager = CLLocationManager()
+    var locationManager = CLLocationManager()
     var userLocation = CLLocation()
+    var channel: PusherChannel!
     
     //Direction && distance the other person is from us
     var heading : Double! = 0.0
@@ -33,36 +34,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             setStatusText()
         }
     }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    /*************************************************
-     Display the distance on-screen
-     Text will be updated as new values come in
-     *************************************************/
-    func setStatusText() {
-        var text = "Status: \(status!)\n"
-        text += "Distance: \(String(format: "%.2f m", distance))"
-        //statusTextView.text = text
-    }
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    //Store and name the root node of the SCCNode MapMarker model (within .scn)
-    var modelNode:SCNNode!
-    let rootNodeName = "MapMarker"
-    
-    //Original transformation of the node to calculate the orientation (rotation) of the model in the best possible way
-    var originalTransform:SCNMatrix4!
-    
-    //Begin working with pusher
-    let pusher = Pusher(
-        key: "YOUR_PUSHER_APP_KEY",
-        options: PusherClientOptions(
-            authMethod: .inline(secret: "YOUR_PUSHER_APP_SECRET"),
-            host: .cluster("YOUR_PUSHER_APP_CLUSTER")
-        )
-    )
-    
-    var channel: PusherChannel!
     
     /**************************************
      Set up SceneKit && Location Services
@@ -101,13 +72,44 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         // For use in foreground
         self.locationManager.requestWhenInUseAuthorization()
         
-        if (CLLocationManager.locationServicesEnabled()) {
+        print("OUTSIDE")
+        
+        // If location services is enabled get the users location
+        if CLLocationManager.locationServicesEnabled() {
             print("T R A C K I N G")
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         }
     }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    /*************************************************
+     Display the distance on-screen
+     Text will be updated as new values come in
+     *************************************************/
+    func setStatusText() {
+        var text = "Status: \(status!)\n"
+        text += "Distance: \(String(format: "%.2f m", distance))"
+        //statusTextView.text = text
+    }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    //Store and name the root node of the SCCNode MapMarker model (within .scn)
+    var modelNode:SCNNode!
+    let rootNodeName = "MapMarker"
+    
+    //Original transformation of the node to calculate the orientation (rotation) of the model in the best possible way
+    var originalTransform:SCNMatrix4!
+    
+    //Begin working with pusher
+    let pusher = Pusher(
+        key: "YOUR_PUSHER_APP_KEY",
+        options: PusherClientOptions(
+            authMethod: .inline(secret: "YOUR_PUSHER_APP_SECRET"),
+            host: .cluster("YOUR_PUSHER_APP_CLUSTER")
+        )
+    )
     
     /************************
      Configure the AR Session
@@ -137,10 +139,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
      Get user location
      -CLLocationManager
      ************************/
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
-        let locValue : CLLocationCoordinate2D = manager.location!.coordinate
-        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            print(location.coordinate)
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
@@ -157,14 +159,14 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     /********************************
      Connect user location to pusher
      ********************************/
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        //Initalize the connect to pusher
+    /*func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {        //Initalize the connect to pusher
         if let location = locations.last {
             userLocation = location
             status = "Connecting to Pusher..."
             
             self.connectToPusher()
         }
-    }
+    }*/
     
     /*********************Added post-Saturday lunch********************/
     //let options = PusherClientOptions(host: .cluster("us2"))
