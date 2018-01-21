@@ -1,6 +1,0 @@
-framework module Pods_Google_Maps_ARKit {
-  umbrella header "Pods-Google-Maps_ARKit-umbrella.h"
-
-  export *
-  module * { export * }
-}
