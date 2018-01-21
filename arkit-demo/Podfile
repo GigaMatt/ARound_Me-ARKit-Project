@@ -9,6 +9,7 @@ target 'arkit-demo' do
   pod 'Alamofire'
   pod 'SwiftyJSON'
   pod 'PusherSwift'
+  pod 'Firebase/Database'
 
   target 'arkit-demoTests' do
     inherit! :search_paths

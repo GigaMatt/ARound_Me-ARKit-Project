@@ -9,9 +9,10 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import Firebase
 
 class CoordinatesFromFirebase {
-    let url: String = "https://sbhacksiv.firebaseio.com/"
+    let url: String = "https://sbhacksiv.firebaseio.com/buildings.json"
     let encoding = Alamofire.JSONEncoding.default
     
     func getLocation() -> Location {
@@ -20,9 +21,13 @@ class CoordinatesFromFirebase {
         // Get location information asynchronously
         getLocationFromFirebase() { json in
             if let json = json {
-                location.name = json["name"].stringValue
-                location.latitude = json["latitude"].double!
-                location.longitude = json["longitude"].double!
+                location.name = json["campbellHall"]["name"].stringValue
+                location.latitude = json["campbellHall"]["latitude"].doubleValue
+                location.longitude = json["campbellHall"]["longitude"].doubleValue
+                
+                print("Name: " + location.name)
+                print("Latitude: " + String(format: "%.2f", location.latitude))
+                print("Longitude: " + String(format: "%.2f", location.longitude))
             }
         }
         
@@ -51,6 +56,18 @@ class CoordinatesFromFirebase {
                 return
             }
             
+            print("JSON EXIST! :D")
+                            
+            var json = JSON(response.result.value!)
+            let locationA : Location = Location()
+            locationA.name = json["name"].stringValue
+            locationA.latitude = json["latitude"].doubleValue
+            locationA.longitude = json["longitude"].doubleValue
+            
+            print("Name: " + locationA.name)
+            print("Latitude: " + String(format: "%.2f", locationA.latitude))
+            print("Longitude: " + String(format: "%.2f", locationA.longitude))
+                            
             // Initialize SwiftyJSON and return it asynchronously
             completionHandler(JSON(response.result.value!))
         }

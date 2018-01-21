@@ -6,8 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -20,45 +18,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Iz-be-hEc">
+                                <rect key="frame" x="147" y="44" width="81.666666666666686" height="734"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daI-Yo-6zs" customClass="ARView">
-                                <rect key="frame" x="0.0" y="140" width="375" height="672"/>
+                                <rect key="frame" x="151" y="288" width="224" height="524"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="96a-zM-8WP"/>
+                                    <constraint firstAttribute="height" constant="739" id="9e9-QA-v4s"/>
+                                </constraints>
                             </arscnView>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="t7A-fn-CgZ">
-                                <rect key="frame" x="16" y="699" width="148.33333333333334" height="79"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Heading" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zxu-us-fI3">
-                                        <rect key="frame" x="0.0" y="0.0" width="148.33333333333334" height="26.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Distance" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CBa-zN-IUe">
-                                        <rect key="frame" x="0.0" y="26.333333333333336" width="148.33333333333334" height="26.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Point of Interest" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02c-85-wHp">
-                                        <rect key="frame" x="0.0" y="52.666666666666664" width="148.33333333333334" height="26.333333333333336"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.58198094740352224" green="0.95523184537887573" blue="0.91936553146033351" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="daI-Yo-6zs" firstAttribute="width" secondItem="rZ5-Wp-pCo" secondAttribute="width" id="1D8-fZ-DmO"/>
-                            <constraint firstItem="daI-Yo-6zs" firstAttribute="height" secondItem="rZ5-Wp-pCo" secondAttribute="height" id="3LP-iP-fLe"/>
-                            <constraint firstItem="t7A-fn-CgZ" firstAttribute="top" secondItem="daI-Yo-6zs" secondAttribute="bottom" constant="-113" id="91z-ML-0ZG"/>
-                            <constraint firstItem="daI-Yo-6zs" firstAttribute="baseline" secondItem="t7A-fn-CgZ" secondAttribute="firstBaseline" constant="15" symbolType="layoutAnchor" id="eca-zK-w01"/>
+                            <constraint firstItem="3Iz-be-hEc" firstAttribute="top" secondItem="m2H-0j-RBQ" secondAttribute="top" id="8Q2-eN-ox7"/>
+                            <constraint firstItem="3Iz-be-hEc" firstAttribute="centerY" secondItem="m2H-0j-RBQ" secondAttribute="centerY" id="Nf4-VC-7EA"/>
+                            <constraint firstItem="3Iz-be-hEc" firstAttribute="centerX" secondItem="m2H-0j-RBQ" secondAttribute="centerX" id="rlk-mC-6ny"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="m2H-0j-RBQ"/>
                     </view>
                     <connections>
                         <outlet property="ARView" destination="daI-Yo-6zs" id="aWH-sj-U49"/>
+                        <outlet property="nameLabel" destination="3Iz-be-hEc" id="rnE-6n-BC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>

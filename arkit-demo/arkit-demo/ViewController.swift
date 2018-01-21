@@ -14,6 +14,8 @@ import CoreLocation
 import PusherSwift
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+    @IBOutlet weak var nameLabel: UILabel!
+    
     //Request && store the user's location
     let locationManager = CLLocationManager()
     var userLocation = CLLocation()
@@ -30,6 +32,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             setStatusText()
         }
     }
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /*************************************************
      Display the distance on-screen
@@ -86,6 +89,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         //Set a padding in the text view
         //statusTextView.textContainerInset = UIEdgeInsetsMake(20.0, 10.0, 10.0, 0.0)
+        
+        // Get information from Firebase
+        let location : Location = CoordinatesFromFirebase().getLocation()
+        sleep(1)
+        print("LOCATION: " + location.name)
+        nameLabel.text = location.name
     }
     
     
