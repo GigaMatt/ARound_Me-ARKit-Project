@@ -14,6 +14,7 @@ import CoreLocation
 import PusherSwift
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
+    @IBOutlet var ARView: ARSCNView!
     @IBOutlet weak var nameLabel: UILabel!
     
     //Request && store the user's location
@@ -60,10 +61,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             host: .cluster("YOUR_PUSHER_APP_CLUSTER")
         )
     )
+    
     var channel: PusherChannel!
-    
-    
-    @IBOutlet var ARView: ARSCNView!
     
     /**************************************
      Set up SceneKit && Location Services
@@ -71,8 +70,12 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Prolong splash screen view
         sleep(2)
-        ARView.scene = SCNScene(named: "art.scnassets/MapMarker.scn")!
+        
+        nameLabel.layer.zPosition = 1
+        
+        ARView.scene = SCNScene(named: "art.scnassets/MapMarker1.scn")!
         
         //Set the view's delegate
         //sceneView.delegate = self
@@ -81,11 +84,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         //Set the scene to the view
         //sceneView.scene = scene
         
-        //Start location services
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        
         //Set the initial status
         status = "Getting user location..."
         
@@ -93,12 +91,23 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         //statusTextView.textContainerInset = UIEdgeInsetsMake(20.0, 10.0, 10.0, 0.0)
         
         // Get information from Firebase
-        let location : Location = CoordinatesFromFirebase().getLocation()
-        sleep(1)
-        print("LOCATION: " + location.name)
-        nameLabel.text = location.name
+        CoordinatesFromFirebase().getLocation()
+        //sleep(1)
+        //print("LOCATION: " + location.name)
+        //nameLabel.text = location.name
+        
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if (CLLocationManager.locationServicesEnabled()) {
+            print("T R A C K I N G")
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
     }
-    
     
     /************************
      Configure the AR Session
@@ -124,21 +133,26 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         ARView.session.pause()
     }
     
-    
     /************************
      Get user location
      -CLLocationManager
      ************************/
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        let locValue : CLLocationCoordinate2D = manager.location!.coordinate
+        print("locations = \(locValue.latitude) \(locValue.longitude)")
+    }
+    
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         // Implementing this method is required
         print(error.localizedDescription)
     }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             locationManager.requestLocation()
         }
     }
-    
     
     /********************************
      Connect user location to pusher
@@ -156,7 +170,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     //let options = PusherClientOptions(host: .cluster("us2"))
     //let pusher = Pusher(key: "6580bda10c04b7ce1a11", options: options)
     /****************************************************************/
-
     func connectToPusher() {                                                                                 //Connect + subscribe to channel, && bind to event
         let channel = pusher.subscribe("private-channel")
         
@@ -175,7 +188,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         pusher.connect()
         status = "Waiting to receive location events..."
     }
-    
     
     /***********************************************
      Calculate distance between us and other person
@@ -224,7 +236,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         }
     }
     
-    
     /********************************************************************
      Modify width/height of 3D plane so arrow emoji can be seen properly
      ********************************************************************/
@@ -235,7 +246,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         node.constraints = [SCNBillboardConstraint()]
         return node
     }
-    
     
     /********************************************************************
      Properly position the model by rotating accordingly
@@ -251,7 +261,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         self.modelNode.scale = scaleNode(location)
     }
     
-    
     /********************************************************************
      Rotate the node along the Y-axis (if need be)
      ********************************************************************/
@@ -259,7 +268,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         let rotation = SCNMatrix4MakeRotation(angleInRadians, 0, 1, 0)
         return SCNMatrix4Mult(transform, rotation)
     }
-    
     
     /***************************************************************************************************************************************
      Scale model in proportion to the distance
@@ -272,7 +280,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         let scale = min( max( Float(1000/distance), 1.5 ), 3 )
         return SCNVector3(x: scale, y: scale, z: scale)
     }
-    
     
     /********************************************************************
      Translate the node
@@ -288,7 +295,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             transform.columns.3.x, transform.columns.3.y, transform.columns.3.z
         )
     }
-    
     
     /****************************************************************************************
      Calculate the Matricies && Bearing between us and the person (Math from Friday night)
@@ -334,16 +340,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         let y = sin(longitudeDiff) * cos(lat2);
         let x = cos(lat1) * sin(lat2) - sin(lat1) * cos(lat2) * cos(longitudeDiff);
         
-        
         return atan2(y, x)
     }
     
     func sessionWasInterrupted(_ session: ARSession) {
         
     }
+    
     func sessionInterruptionEnded(_ session: ARSession) {
         
     }
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         
     }
