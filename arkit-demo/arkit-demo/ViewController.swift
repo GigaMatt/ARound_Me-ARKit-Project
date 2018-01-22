@@ -42,9 +42,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         super.viewDidLoad()
         
         // Prolong splash screen view
-        sleep(2)
+        //sleep(2)
         
-        nameLabel.layer.zPosition = 1
+        //nameLabel.layer.zPosition = 1
         
         ARView.scene = SCNScene(named: "art.scnassets/MapMarker1.scn")!
         
@@ -203,7 +203,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         //Will ALWAYS be nil at first initiation
         if self.modelNode == nil {
-            let modelScene = SCNScene(named: "art.scnassets/MapMarker1.dae")!                                 //FIXME: May need to be head.scn
+            let modelScene = SCNScene(named: "art.scnassets/MapMarker1.dae")!
             self.modelNode = modelScene.rootNode.childNode(withName: rootNodeName, recursively: true)!
             
             //Move model's pivot to its center in the Y axis

@@ -18,12 +18,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Iz-be-hEc">
-                                <rect key="frame" x="147" y="44" width="81.666666666666686" height="734"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="daI-Yo-6zs" customClass="ARView">
                                 <rect key="frame" x="151" y="288" width="224" height="524"/>
                                 <constraints>
@@ -33,16 +27,10 @@
                             </arscnView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="3Iz-be-hEc" firstAttribute="top" secondItem="m2H-0j-RBQ" secondAttribute="top" id="8Q2-eN-ox7"/>
-                            <constraint firstItem="3Iz-be-hEc" firstAttribute="centerY" secondItem="m2H-0j-RBQ" secondAttribute="centerY" id="Nf4-VC-7EA"/>
-                            <constraint firstItem="3Iz-be-hEc" firstAttribute="centerX" secondItem="m2H-0j-RBQ" secondAttribute="centerX" id="rlk-mC-6ny"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="m2H-0j-RBQ"/>
                     </view>
                     <connections>
                         <outlet property="ARView" destination="daI-Yo-6zs" id="aWH-sj-U49"/>
-                        <outlet property="nameLabel" destination="3Iz-be-hEc" id="rnE-6n-BC3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
