@@ -11,7 +11,7 @@ import UIKit
 import ARKit
 import SceneKit
 import CoreLocation
-import PusherSwift
+//import PusherSwift
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     @IBOutlet var ARView: ARSCNView!
